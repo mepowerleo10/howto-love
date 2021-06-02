@@ -1,18 +1,27 @@
 function love.load()
-    x = 100
+    rect = {}
+    rect.width = 70
+    rect.height = 90
+    rect.x = 100
+    rect.y = 100
+    rect.speed = 100
 end
 
 function love.update(dt)
-    word = dt
+    delta = dt
 
     if love.keyboard.isDown("right") then
-        x = x + 50 * dt
+        rect.x = rect.x + rect.speed * dt
     elseif love.keyboard.isDown("left") then
-        x = x - 50 * dt
+        rect.x = rect.x - rect.speed * dt
+    elseif love.keyboard.isDown("up") then
+        rect.y = rect.y - rect.speed * dt
+    elseif love.keyboard.isDown("down") then
+        rect.y = rect.y + rect.speed * dt
     end
 end
 
 function love.draw()
-    love.graphics.rectangle("line", x, 50, 200, 150)
-    love.graphics.print(word, 100, 100)
+    love.graphics.rectangle("line", rect.x, rect.y, rect.width, rect.height)
+    love.graphics.print("delta: "..delta, 100, 100)
 end
