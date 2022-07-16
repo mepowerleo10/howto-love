@@ -1,14 +1,18 @@
-local function T2D(w,h) 
-    local t={} 
-    for y=1,h do 
-        t[y]={} 
-        for x=1,w do 
-            t[y][x]=0 
-        end 
-    end 
-    return t 
+if arg[2] == "debug" then
+  require("lldebugger").start()
 end
- 
+
+local function T2D(w,h)
+    local t={}
+    for y=1,h do
+        t[y]={}
+        for x=1,w do
+            t[y][x]=0
+        end
+    end
+    return t
+end
+
 local Life = {
   new = function(self,w,h)
     return setmetatable({ w=w, h=h, gen=1, curr=T2D(w,h), next=T2D(w,h)}, {__index=self})
@@ -65,7 +69,14 @@ local Life = {
                 blockDrawSize,
                 blockDrawSize
             )
+
         end
+
+        love.graphics.print(
+          love.getVersion(),
+          0,
+          0
+        )
       end
     end
   end
@@ -95,7 +106,7 @@ function love.load()
     }
 
     run = false
-    
+
     blockSize = 10
     blockDrawSize = blockSize - 1
 
